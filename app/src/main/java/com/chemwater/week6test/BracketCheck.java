@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class BracketCheck {
 
-    public static final String NEW_VARIABLE = "[]{}() : " ;
+    public static final String NEW_VARIABLE = "({})[] : " ;
 
     public static void main(String[] args) {
 
@@ -20,26 +20,26 @@ public class BracketCheck {
         if (expr.isEmpty())
             return "True";
 
-        Stack<Character> stack = new Stack<Character>();
-        for (int i = 0; i < expr.length(); i++)
+        Stack<Character> stackOne = new Stack<Character>();
+        for (int j = 0; j < expr.length(); j++)
         {
-            char current = expr.charAt(i);
+            char current = expr.charAt(j);
             if (current == '{' || current == '(' || current == '[')
             {
-                stack.push(current);
+                stackOne.push(current);
             }
             if (current == '}' || current == ')' || current == ']')
             {
-                if (stack.isEmpty())
+                if (stackOne.isEmpty())
                     return "False";
-                char last = stack.peek();
+                char last = stackOne.peek();
                 if (current == '}' && last == '{' || current == ')' && last == '(' || current == ']' && last == '[')
-                    stack.pop();
+                    stackOne.pop();
                 else
                     return "False";
             }
         }
-        return stack.isEmpty()?"True":"False";
+        return stackOne.isEmpty()?"True":"False";
     }
 
 }
